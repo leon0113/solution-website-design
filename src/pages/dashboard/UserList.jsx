@@ -10,10 +10,30 @@ import Paper from "@mui/material/Paper";
 import { Button, Typography } from "@material-tailwind/react";
 import styled from "@emotion/styled";
 import IconButton from "@mui/material/IconButton";
-import AutoDeleteIcon from "@mui/icons-material/AutoDelete";
-import EditNoteIcon from "@mui/icons-material/EditNote";
+import DeleteIcon from '@mui/icons-material/Delete';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 const UserList = () => {
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+
     const Title = styled(Typography)(({ theme }) => ({
         fontSize: "14px",
         fontWeight: "500",
@@ -23,70 +43,64 @@ const UserList = () => {
         fontWeight: "400",
     }));
 
+
+
     const fakeData = [
         {
-            name: {
-                name: "David Wagner",
-                email: "david_wagner@example.com",
-            },
-            createDate: "24 Otc, 2022",
-            role: "Lorem Ipsum",
-            admin: true,
+            name: "Lorem ipsum",
+            number: 614
         },
         {
-            name: {
-                name: "David Wagner",
-                email: "david_wagner@example.com",
-            },
-            createDate: "24 Otc, 2022",
-            role: "Lorem Ipsum",
-            admin: true,
+            name: "Lorem ipsum",
+            number: 614
         },
         {
-            name: {
-                name: "David Wagner",
-                email: "david_wagner@example.com",
-            },
-            createDate: "24 Otc, 2022",
-            role: "Lorem Ipsum",
-            admin: true,
+            name: "Lorem ipsum",
+            number: 614
         },
         {
-            name: {
-                name: "David Wagner",
-                email: "david_wagner@example.com",
-            },
-            createDate: "24 Otc, 2022",
-            role: "Lorem Ipsum",
-            admin: true,
+            name: "Lorem ipsum",
+            number: 614
         },
         {
-            name: {
-                name: "David Wagner",
-                email: "david_wagner@example.com",
-            },
-            createDate: "24 Otc, 2022",
-            role: "Lorem Ipsum",
-            admin: false,
+            name: "Lorem ipsum",
+            number: 614
+        },
+
+    ];
+    const fakeUser = [
+        {
+            name: "Victoria Perez",
+            userID: "LA-0234",
+            lorem: "Lorem Ipsum",
+            date: "30 Apr, 2017 to 24 Otc 2020",
         },
         {
-            name: {
-                name: "David Wagner",
-                email: "david_wagner@example.com",
-            },
-            createDate: "24 Otc, 2022",
-            role: "Lorem Ipsum",
-            admin: true,
+            name: "Victoria Perez",
+            userID: "LA-0234",
+            lorem: "Lorem Ipsum",
+            date: "30 Apr, 2017 to 24 Otc 2020",
         },
         {
-            name: {
-                name: "David Wagner",
-                email: "david_wagner@example.com",
-            },
-            createDate: "24 Otc, 2022",
-            role: "Lorem Ipsum",
-            admin: false,
+            name: "Victoria Perez",
+            userID: "LA-0234",
+            lorem: "Lorem Ipsum",
+            date: "30 Apr, 2017 to 24 Otc 2020",
         },
+        {
+            name: "Victoria Perez",
+            userID: "LA-0234",
+            lorem: "Lorem Ipsum",
+            date: "30 Apr, 2017 to 24 Otc 2020",
+        },
+        {
+            name: "Victoria Perez",
+            userID: "LA-0234",
+            lorem: "Lorem Ipsum",
+            date: "30 Apr, 2017 to 24 Otc 2020",
+        },
+
+
     ];
 
     return (
@@ -106,154 +120,55 @@ const UserList = () => {
                     />
                 </div>
                 <div>
-                    <button className="rounded-lg bg-[#63666A] px-4 py-2.5 uppercase text-white">
-                        Add user
-                    </button>
+                    <Button className="rounded-lg bg-[#63666A] px-4 py-2.5 uppercase text-white" onClick={handleOpen} >Add User</Button>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Text in a modal
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                            </Typography>
+                        </Box>
+                    </Modal>
                 </div>
                 <div>
                     <MoreVertIcon />
                 </div>
             </div>
 
-            {/* //!====================================================================================================================== */}
+            {/* //!data cards*/}
             <div className="row my-4">
-                <div className="col" >
-                    <div className="card shadow" style={{ height: "140px" }}>
-                        <div className="card-body">
-                            <div className="d-flex">
-                                <h4
-                                    className="fs-4 text-muted"
-                                    style={{
-                                        letterSpacing: "0.3px",
-                                        fontWeight: "500",
-                                        color: "#5E5873",
-                                    }}
-                                >
-                                    Reach
-                                </h4>
+                {fakeData.map((data) => (
+                    <div className="col" >
+                        <div className="card shadow" style={{ height: "110px" }}>
+                            <div className="card-body">
+                                <div className="d-flex">
+                                    <h4
+                                        style={{
+                                            fontSize: "15px",
+                                            fontWeight: "200",
+                                            color: "#5E5873",
+                                        }}
+                                    >
+                                        {data.name}
+                                    </h4>
+                                </div>
+                                <h2 className="fs-2 my-2 text-black" style={{ fontWeight: "600" }}>
+                                    {data.number}
+                                </h2>
                             </div>
-                            <h2 className="fs-2 my-2" style={{ fontWeight: "600" }}>
-                                hi
-                            </h2>
-
-                            {/* <h4
-                                className="my-2"
-                                style={{
-                                    letterSpacing: "0.5px",
-                                    fontWeight: "400",
-                                    color: "#5E5873",
-                                }}
-                            >
-                                Reach
-                            </h4> */}
                         </div>
                     </div>
-                </div>
-
-                <div className="col" >
-                    <div className="card shadow" style={{ height: "140px" }}>
-                        <div className="card-body">
-                            <div className="d-flex">
-                                <h4
-                                    className="fs-4 text-muted"
-                                    style={{
-                                        letterSpacing: "0.3px",
-                                        fontWeight: "500",
-                                        color: "#5E5873",
-                                    }}
-                                >
-                                    Reach
-                                </h4>
-                            </div>
-                            <h2 className="fs-2 my-2" style={{ fontWeight: "600" }}>
-                                hi
-                            </h2>
-
-                            {/* <h4
-                                className="my-2"
-                                style={{
-                                    letterSpacing: "0.5px",
-                                    fontWeight: "400",
-                                    color: "#5E5873",
-                                }}
-                            >
-                                Reach
-                            </h4> */}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col" >
-                    <div className="card shadow" style={{ height: "140px" }}>
-                        <div className="card-body">
-                            <div className="d-flex">
-                                <h4
-                                    className="fs-4 text-muted"
-                                    style={{
-                                        letterSpacing: "0.3px",
-                                        fontWeight: "500",
-                                        color: "#5E5873",
-                                    }}
-                                >
-                                    Engagement
-                                </h4>
-                            </div>
-                            <h2 className="fs-2 my-2" style={{ fontWeight: "600" }}>
-                                helloo
-                            </h2>
-
-                            {/* <h4
-                                className="my-2"
-                                style={{
-                                    letterSpacing: "0.5px",
-                                    fontWeight: "400",
-                                    color: "#5E5873",
-                                }}
-                            >
-                                Engagement
-                            </h4> */}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col" >
-                    <div className="card shadow" style={{ height: "140px" }}>
-                        <div className="card-body">
-                            <div className="d-flex">
-                                <h4
-                                    className="fs-4 text-muted"
-                                    style={{
-                                        letterSpacing: "0.3px",
-                                        fontWeight: "500",
-                                        color: "#5E5873",
-                                    }}
-                                >
-                                    Link Clicks
-                                </h4>
-                            </div>
-                            <h2 className="fs-2 my-2" style={{ fontWeight: "600" }}>
-                                hiiii
-                            </h2>
-
-                            <h4
-                                className="my-2"
-                                style={{
-                                    letterSpacing: "0.5px",
-                                    fontWeight: "400",
-                                    color: "#5E5873",
-                                }}
-                            >
-                                Link Clicks
-                            </h4>
-
-                        </div>
-                    </div>
-                </div>
+                ))};
             </div>
-            {/* //!====================================================================================================================== */}
 
-
-            {/* Table */}
+            {/* //! Table */}
 
             <TableContainer
                 component={Paper}
@@ -267,13 +182,15 @@ const UserList = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>Name</TableCell>
-                            <TableCell>Create Date</TableCell>
-                            <TableCell>Role</TableCell>
+                            <TableCell>User ID</TableCell>
+                            <TableCell>Lorem ipsum</TableCell>
+                            <TableCell>Date</TableCell>
+                            <TableCell>Lorem ipsum</TableCell>
                             <TableCell>Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {fakeData.map((data, i) => (
+                        {fakeUser.map((data, i) => (
                             <TableRow
                                 key={i}
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -281,34 +198,28 @@ const UserList = () => {
                                 <TableCell component="th" scope="row">
                                     <div className="flex items-center lg:gap-[120px]">
                                         <div>
-                                            <Title>{data.name.name}</Title>
-                                            <Token>{data.name.email}</Token>
-                                        </div>
-                                        <div>
-                                            {data.admin ? (
-                                                <button className="rounded-xl bg-[#63666A] px-12 py-2 text-white">
-                                                    Admin
-                                                </button>
-                                            ) : (
-                                                <button className="rounded-xl bg-[#EFF4FA] px-12 py-2 text-black">
-                                                    Client
-                                                </button>
-                                            )}
+                                            <Title>{data.name}</Title>
                                         </div>
                                     </div>
                                 </TableCell>
                                 <TableCell>
-                                    <Token>{data.createDate}</Token>
+                                    <Token>{data.userID}</Token>
                                 </TableCell>
                                 <TableCell>
-                                    <Token>{data.role}</Token>
+                                    <Token>{data.lorem}</Token>
+                                </TableCell>
+                                <TableCell>
+                                    <Token>{data.date}</Token>
+                                </TableCell>
+                                <TableCell>
+                                    <Token>{data.lorem}</Token>
                                 </TableCell>
                                 <TableCell>
                                     <IconButton aria-label="delete">
-                                        <EditNoteIcon />
+                                        <TaskAltIcon />
                                     </IconButton>
                                     <IconButton aria-label="delete">
-                                        <AutoDeleteIcon />
+                                        <DeleteIcon />
                                     </IconButton>
                                 </TableCell>
                             </TableRow>
