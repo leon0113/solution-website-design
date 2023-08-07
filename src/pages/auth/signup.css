@@ -1,0 +1,14 @@
+
+.typo {
+    color: #000000 !important;
+font-weight: 600 !important;
+font-size: 40px !important;
+line-height: 49px !important;
+letter-spacing: 0em !important;
+text-align: left;
+  }
+  .pp {
+    color: rgba(0, 0, 0, 0.6) !important;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+  }

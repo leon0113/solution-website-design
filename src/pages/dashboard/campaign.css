@@ -1,0 +1,10 @@
+.option:hover {
+    border: none;
+}
+.option::after {
+    border: none;
+}
+select::after {
+    border: none;
+    
+}

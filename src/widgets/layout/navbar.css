@@ -1,0 +1,19 @@
+.logo {
+    background: linear-gradient(180deg, #7367F0 0%, #36B33C 100%);
+    width: 43px;
+    border-radius: 5px;
+    height: 37px;
+    padding-left: 5px;
+    padding-right: 11px;
+    }
+    
+    .title {
+        margin-left: 10px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-top: 7px;
+    }
+
+    .svgIcon:hover {
+        cursor: pointer;
+    }

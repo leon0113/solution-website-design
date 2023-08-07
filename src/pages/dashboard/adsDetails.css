@@ -1,0 +1,23 @@
+.content__wrapper__padding {
+  padding: 36px 44px;
+}
+
+.margin-top-7 {
+  margin-top: 28px;
+}
+
+.grid-gap-20 {
+  gap: 80px;
+}
+
+@media only screen and (max-width: 768px) {
+  .content__wrapper__padding {
+    padding: 16px 20px;
+  }
+  .margin-top-7 {
+    margin-top: 12px;
+  }
+  .grid-gap-20 {
+    gap: 20px;
+  }
+}
