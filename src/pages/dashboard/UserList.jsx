@@ -12,8 +12,14 @@ import styled from "@emotion/styled";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import UserListModalContent from "./UserListModalContent";
 
 const style = {
     position: 'absolute',
@@ -30,8 +36,16 @@ const style = {
 const UserList = () => {
 
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
 
     const Title = styled(Typography)(({ theme }) => ({
@@ -120,22 +134,32 @@ const UserList = () => {
                     />
                 </div>
                 <div>
-                    <Button className="rounded-lg bg-[#63666A] px-4 py-2.5 uppercase text-white" onClick={handleOpen} >Add User</Button>
-                    <Modal
+                    <Button className="rounded-lg bg-[#63666A] px-4 py-2.5 uppercase text-white" onClick={handleClickOpen}>
+                        Add User
+                    </Button>
+                    <Dialog
+                        fullScreen={fullScreen}
                         open={open}
                         onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
+                        aria-labelledby="responsive-dialog-title"
                     >
-                        <Box sx={style}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                Text in a modal
-                            </Typography>
-                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                            </Typography>
-                        </Box>
-                    </Modal>
+                        <DialogTitle id="responsive-dialog-title">
+                            {"Add User"}
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                <UserListModalContent />
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button className="rounded-lg border bg-[#f0f0f1] px-4 py-2.5 uppercase text-black" autoFocus onClick={handleClose}>
+                                Cancel
+                            </Button>
+                            <Button className="rounded-lg bg-[#63666A] px-4 py-2.5 uppercase text-white" onClick={handleClose} autoFocus>
+                                Add User
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
                 <div>
                     <MoreVertIcon />
